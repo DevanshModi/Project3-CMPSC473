@@ -243,3 +243,6 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+/Project3-CMPSC473-Spring2017/Project 3.sln
+/Project3-CMPSC473-Spring2017/Project 3.vcxproj
+/Project3-CMPSC473-Spring2017/Project 3.vcxproj.filters
