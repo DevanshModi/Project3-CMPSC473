@@ -18,26 +18,31 @@ int main() {
 	int hold;
 
 	while (1) {
-
+		tb_N = 3;tb_numFrames = 4;tb_virtualAddressSpaceSize = 8;policy = 1;
 		std::cout << "Please enter N\t(page address bits size)\n";
-		std::cin >> tb_N;
+		//std::cin >> tb_N;
 
 		std::cout << "Please enter numFrames\t(total number of physical frames)\n";
-		std::cin >> tb_numFrames;
+		//std::cin >> tb_numFrames;
 
 		std::cout << "Please enter virtualAddressSpaceSize\n";
-		std::cin >> tb_virtualAddressSpaceSize;
+		//std::cin >> tb_virtualAddressSpaceSize;
 
 		std::cout << "Please enter '1' for FIFO (first in, first out)\nPlease enter '2' for LRU (least recently used)\n";
-		std::cin >> policy;
+		//std::cin >> policy;
 
 		if (policy == 1) {
 			// Initiate FIFO testbench
 			memoryManager fifoTest = memoryManager(FIFO, tb_N, tb_numFrames, tb_virtualAddressSpaceSize);
 
 			// Emulate the memory manager
+
 			std::cout<<"First Function Call"<<fifoTest.memoryAccess(171);
-			fifoTest.memoryAccess(141);
+			std::cout << "First Function Call" << fifoTest.memoryAccess(141);
+			std::cout << "First Function Call" << fifoTest.memoryAccess(13);
+			std::cout << "First Function Call" << fifoTest.memoryAccess(227);
+			std::cout << "First Function Call" << fifoTest.memoryAccess(203);
+			std::cout << "First Function Call" << fifoTest.memoryAccess(4);
 			fifoTest.memoryAccess(1);
 			fifoTest.memoryAccess(6);
 			fifoTest.memoryAccess(4);
