@@ -3,21 +3,17 @@
 #include <list>
 #include "virtualMemoryManagerInterface.hpp"
 
-// Local Variables
-ReplacementPolicy policy;
-
 // Structures
 struct PageEntry
 {
-	unsigned long long addr;
-	unsigned int frameNum;
-	unsigned int pageNum;
-	unsigned int counter;
+	int pageNum;
+	int counter;
+	int validBit;
+	double frameRef;
+	double offset;
 };
-
 struct PageTable
 {
-	
 	// List contructor
 	std::list<PageEntry> *table;
 
@@ -28,16 +24,17 @@ struct PageTable
 
 	// Add new page to table
 	void push(PageEntry *page) {
-		table->push_back(page);	/// TODO:	figure out why page argument can't be pushed into table
+		table->push_back(*page);
 	}
 
 	// Remove the last page and return it
 	PageEntry* pop() {
 		if (isEmpty())
 			return NULL;
-		PageEntry *page = table->front();	/// TODO:	figure out why referenced page can't be created from popped element
+		PageEntry page = table->front();
+		free(&page);
 		table->pop_front();
-		return page;
+		//return &page;
 	}
 
 	// Checks size of page table
@@ -54,20 +51,23 @@ struct PageTable
 
 class memoryManager : public virtualMemoryManagerInterface {
 public:
-
 	memoryManager(ReplacementPolicy p, unsigned int pS, unsigned int nF, unsigned int vA) : virtualMemoryManagerInterface(p, pS, nF, vA) {
 		pageTable = new PageTable();
 		policy = p;
+		pageSize = pS;
+		frameSize = nF;
+		vAddrSize = vA;
 	}
-
 	unsigned long long memoryAccess(unsigned long long address) override;
-
 	void swap(unsigned int frameNumber, unsigned int pageNumber);
+	void newPageEntry(unsigned long long addr);
 
 private:
-
 	PageTable *pageTable = NULL;
-	int mycounter = 0;
-	int myNumSwaps = 0;
+	int accessCounter = 0;
 
+	ReplacementPolicy policy;
+	unsigned int pageSize, frameSize, vAddrSize;
+	unsigned long long addr;
+	PageEntry *page = NULL;
 };
