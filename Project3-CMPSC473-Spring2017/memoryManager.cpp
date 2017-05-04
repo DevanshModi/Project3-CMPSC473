@@ -62,10 +62,13 @@ unsigned long long memoryManager::memoryAccess(unsigned long long address)
 	else {
 		if (policy == FIFO) {
 			//Check for page fault here.
-			if (!pageTable->CheckFrame(page->pageNum)) {
+			if (pageTable->CheckFrame(page->pageNum)==0) {
 				pageTable->doFIFO(pageTable->Point,page); 
 				swap(page->frameAddr, page->pageNum);
 			}
+			else page->frameAddr = pageTable->CheckFrame(page->pageNum);
+
+			return page->frameAddr*pagesize + offset;
 		}
 		else {
 

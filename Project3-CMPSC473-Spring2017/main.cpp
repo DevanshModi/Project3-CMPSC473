@@ -37,12 +37,12 @@ int main() {
 
 			// Emulate the memory manager
 
-			std::cout<<"First Function Call"<<fifoTest.memoryAccess(171);
-			std::cout << "First Function Call" << fifoTest.memoryAccess(141);
-			std::cout << "First Function Call" << fifoTest.memoryAccess(13);
-			std::cout << "First Function Call" << fifoTest.memoryAccess(227);
-			std::cout << "First Function Call" << fifoTest.memoryAccess(203);
-			std::cout << "First Function Call" << fifoTest.memoryAccess(4);
+			std::cout<<"First Function Call"<<fifoTest.memoryAccess(171)<<endl;
+			std::cout << "First Function Call" << fifoTest.memoryAccess(141) << endl;
+			std::cout << "First Function Call" << fifoTest.memoryAccess(13) << endl;
+			std::cout << "First Function Call" << fifoTest.memoryAccess(227) << endl;
+			std::cout << "First Function Call" << fifoTest.memoryAccess(203) << endl;
+			std::cout << "First Function Call" << fifoTest.memoryAccess(4) << endl;
 			fifoTest.memoryAccess(1);
 			fifoTest.memoryAccess(6);
 			fifoTest.memoryAccess(4);

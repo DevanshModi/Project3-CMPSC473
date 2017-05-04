@@ -107,13 +107,13 @@ struct PageTable
 	}
 
 	// Checks if page is in page table and return index to physical memory location if it is
-	bool CheckFrame(unsigned int pnum) {
-		bool e = 0;
+	int CheckFrame(unsigned int pnum) {
+		int e = 0;
 		unsigned int count = 0;
 		std::list<PageEntry>::iterator list_iter;
 		for (list_iter = table->begin(); count<=Frames && list_iter != table->end(); list_iter++) {
 			if ((list_iter)->pageNum == pnum)
-				e = 1;
+				e = (list_iter)->frameAddr;
 			count++;
 		}
 		return e;
