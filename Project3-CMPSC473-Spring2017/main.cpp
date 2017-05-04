@@ -36,8 +36,8 @@ int main() {
 			memoryManager fifoTest = memoryManager(FIFO, tb_N, tb_numFrames, tb_virtualAddressSpaceSize);
 
 			// Emulate the memory manager
-			fifoTest.memoryAccess(0);
-			fifoTest.memoryAccess(2);
+			std::cout<<"First Function Call"<<fifoTest.memoryAccess(171);
+			fifoTest.memoryAccess(141);
 			fifoTest.memoryAccess(1);
 			fifoTest.memoryAccess(6);
 			fifoTest.memoryAccess(4);

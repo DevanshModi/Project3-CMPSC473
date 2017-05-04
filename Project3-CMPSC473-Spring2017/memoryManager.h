@@ -35,7 +35,7 @@ struct PageTable
 		if (isEmpty())
 			return NULL;
 		PageEntry page = table->front();
-		//free(&page);
+		free(&page);
 		table->pop_front();
 	}
 
@@ -44,7 +44,7 @@ struct PageTable
 		if (isEmpty())
 			return NULL;
 		PageEntry page = table->back();
-		//free(&page);
+		free(&page);
 		table->pop_back();
 	}
 

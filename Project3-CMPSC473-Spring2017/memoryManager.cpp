@@ -13,11 +13,21 @@ unsigned long long memoryManager::memoryAccess(unsigned long long address)
 			pageTable->pushFIFO(page);			// Push the page to page table
 		else
 			pageTable->pushLRU(page);			// Push the page to page table
+		int offset = address % (2 ^ N);
+		return page->frameIndex*(2^N) + offset;
 	}
 	/*
 	If the page table is not full, continue adding pages
 	*/
-	else if (index = pageTable->size() < numFrames) {
+	else if (index = pageTable->size()-1 < numFrames) {
+		// Check if address already exists in page table
+		index = pageTable->inTable(address, N);
+		// Physical address found so return index + frameIndex
+		if (index != -1) {
+			int offset = address % (2^N);
+			return page->frameIndex*(2 ^ N) + offset;
+		}
+
 		// Create new page entry if not in page table
 		newPageEntry(address, index);		// Create a new page entry
 		if (policy == FIFO)
@@ -33,8 +43,8 @@ unsigned long long memoryManager::memoryAccess(unsigned long long address)
 		index = pageTable->inTable(address, N);
 		// Physical address found so return index + frameIndex
 		if (index != -1) {
-			int offset = address % pow(2, N);
-			return page->frameIndex + offset;
+			int offset = address % (2^N);
+			return page->frameIndex*(2 ^ N) + offset;
 		}
 		// Page table is full so swap
 		swap(address, page->pageNum);
